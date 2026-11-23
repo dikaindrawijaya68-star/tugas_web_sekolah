@@ -1294,6 +1294,203 @@
                 border-bottom: none;
             }
         }
+
+        /* ================= SCROLL ANIMATIONS & EFFECTS ================= */
+        /* Scroll Progress Bar at the top of the viewport */
+        .scroll-progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0%;
+            background: linear-gradient(90deg, var(--emerald-vibrant), var(--accent-gold));
+            z-index: 9999;
+            box-shadow: 0 0 12px rgba(52, 211, 153, 0.7);
+            transition: width 0.1s cubic-bezier(0.1, 0.5, 0.5, 1);
+            pointer-events: none;
+        }
+
+        /* Navbar scrolled elevation */
+        .navbar-wrap.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 30px rgba(6, 78, 59, 0.12);
+            padding: 2px 0;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme="light"]) .navbar-wrap.scrolled {
+                background: rgba(15, 23, 42, 0.98) !important;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45) !important;
+            }
+        }
+
+        /* Floating Back to Top Button */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 84px;
+            right: 24px;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(6, 95, 70, 0.35);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            z-index: 98;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.85);
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scroll-top-btn.is-visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .scroll-top-btn:hover {
+            background: var(--accent-gold);
+            color: var(--primary-dark);
+            transform: translateY(-4px) scale(1.1);
+            box-shadow: 0 12px 28px rgba(245, 158, 11, 0.45);
+        }
+
+        /* Base scroll reveal styles */
+        .reveal,
+        .reveal-left,
+        .reveal-right,
+        .reveal-zoom {
+            opacity: 0;
+            will-change: opacity, transform;
+            transition-duration: 0.85s;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+            transition-property: opacity, transform;
+        }
+
+        .reveal {
+            transform: translateY(40px);
+        }
+
+        .reveal-left {
+            transform: translateX(-50px);
+        }
+
+        .reveal-right {
+            transform: translateX(50px);
+        }
+
+        .reveal-zoom {
+            transform: scale(0.92) translateY(20px);
+        }
+
+        /* Visible active state */
+        .reveal.is-visible,
+        .reveal-left.is-visible,
+        .reveal-right.is-visible,
+        .reveal-zoom.is-visible {
+            opacity: 1;
+            transform: translate(0, 0) scale(1);
+        }
+
+        /* Staggered delay for grid items */
+        .stagger-group .reveal:nth-child(1) { transition-delay: 0.06s; }
+        .stagger-group .reveal:nth-child(2) { transition-delay: 0.16s; }
+        .stagger-group .reveal:nth-child(3) { transition-delay: 0.26s; }
+        .stagger-group .reveal:nth-child(4) { transition-delay: 0.36s; }
+        .stagger-group .reveal:nth-child(5) { transition-delay: 0.46s; }
+        .stagger-group .reveal:nth-child(6) { transition-delay: 0.56s; }
+
+        /* Manual delay classes */
+        .delay-1 { transition-delay: 0.12s !important; }
+        .delay-2 { transition-delay: 0.22s !important; }
+        .delay-3 { transition-delay: 0.32s !important; }
+
+        /* Smooth card micro-interactions */
+        .jurusan-card,
+        .fasilitas-card,
+        .ekskul-card,
+        .vm-card,
+        .profil-card,
+        .kontak-card,
+        .maps-placeholder,
+        .ppdb-container {
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                        opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Hero Entrance Keyframes */
+        @keyframes heroFadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heroBadgePop {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.92);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-badge {
+            animation: heroBadgePop 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+
+        .hero-container h1 {
+            animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.15s backwards;
+        }
+
+        .hero-container p {
+            animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.3s backwards;
+        }
+
+        .hero-buttons {
+            animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards;
+        }
+
+        .hero-trust {
+            animation: heroFadeInUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.55s backwards;
+        }
+
+        .hero-visual {
+            animation: heroFadeInUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards;
+        }
+
+        /* Respect accessibility preferences */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .reveal-zoom,
+            .hero-badge,
+            .hero-container h1,
+            .hero-container p,
+            .hero-buttons,
+            .hero-trust,
+            .hero-visual {
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+                animation: none !important;
+            }
+        }
     </style>
 </head>
 
@@ -1377,21 +1574,21 @@
         </section>
 
         <!-- STATISTIK KILAT -->
-        <div class="stats-wrap">
-            <div class="stats-grid" aria-label="Statistik Sekolah">
-                <div class="stat-item">
+        <div class="stats-wrap reveal reveal-zoom">
+            <div class="stats-grid stagger-group" aria-label="Statistik Sekolah">
+                <div class="stat-item reveal">
                     <div class="stat-number">120<span>+</span></div>
                     <div class="stat-label">Siswa Aktif</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item reveal">
                     <div class="stat-number">30<span>+</span></div>
                     <div class="stat-label">Guru & Tenaga Pendidik</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item reveal">
                     <div class="stat-number">4</div>
                     <div class="stat-label">Jurusan Unggulan</div>
                 </div>
-                <div class="stat-item">
+                <div class="stat-item reveal">
                     <div class="stat-number">6</div>
                     <div class="stat-label">Ekstrakurikuler Pilihan</div>
                 </div>
@@ -1400,21 +1597,21 @@
 
         <!-- PROFIL & SEJARAH -->
         <section id="profil" class="section">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Tentang Kami</span>
                 <h2 class="section-title">Profil SMK Mutiara Bandung</h2>
                 <p class="section-desc">Membangun masa depan generasi muda melalui pendidikan vokasi yang bermutu tinggi dan berkarakter.</p>
             </div>
 
             <div class="profil-card">
-                <div class="profil-img">
+                <div class="profil-img reveal-left">
                     <img src="{{ asset('images/gedung-sekolah.jpg') }}" alt="Gedung Kampus SMK Mutiara Bandung">
                     <div class="profil-img-caption">
                         <h4>Gedung Kampus SMK Mutiara Bandung</h4>
                         <p>Kampus hijau yang asri dan nyaman di Jl. Maleber Utara No. 37, Bandung.</p>
                     </div>
                 </div>
-                <div class="profil-content">
+                <div class="profil-content reveal-right">
                     <h3>Sejarah Singkat</h3>
                     <p>
                         SMK Mutiara Bandung berdiri sejak tahun 1998 di bawah naungan Yayasan Pendidikan Mutiara Bandung. 
@@ -1431,14 +1628,14 @@
 
             <!-- VISI & MISI -->
             <div class="visi-misi-grid">
-                <div class="vm-card">
+                <div class="vm-card reveal-left">
                     <h3><span>🎯</span> Visi Sekolah</h3>
                     <p style="color: var(--text-main); font-weight: 600; line-height: 1.8;">
                         "Menjadi Sekolah Menengah Kejuruan unggulan yang menghasilkan tamatan berkarakter mulia, 
                         profesional, berjiwa wirausaha, serta adaptif terhadap kemajuan teknologi."
                     </p>
                 </div>
-                <div class="vm-card">
+                <div class="vm-card reveal-right delay-1">
                     <h3><span>🚀</span> Misi Sekolah</h3>
                     <ol>
                         <li>Menyelenggarakan pembelajaran berbasis proyek nyata (Project-Based Learning) dan Teaching Factory.</li>
@@ -1452,15 +1649,15 @@
 
         <!-- JURUSAN / PROGRAM KEAHLIAN -->
         <section id="jurusan" class="section-jurusan-bg">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Program Keahlian</span>
                 <h2 class="section-title">Jurusan Unggulan</h2>
                 <p class="section-desc">Pilih program keahlian masa depan yang sesuai dengan minat dan bakat terbaikmu.</p>
             </div>
 
-            <div class="jurusan-grid">
+            <div class="jurusan-grid stagger-group">
                 <!-- TKR -->
-                <article class="jurusan-card">
+                <article class="jurusan-card reveal">
                     <div class="jurusan-icon-box">🚗</div>
                     <h3>Teknik Kendaraan Ringan</h3>
                     <p>Mempelajari perawatan & perbaikan mesin otomotif mobil, sistem injeksi EFI, kelistrikan bodi kendaraan, chasis, dan sistem pemindah tenaga.</p>
@@ -1474,7 +1671,7 @@
                 </article>
 
                 <!-- MP -->
-                <article class="jurusan-card">
+                <article class="jurusan-card reveal">
                     <div class="jurusan-icon-box">📁</div>
                     <h3>Manajemen Perkantoran</h3>
                     <p>Menguasai tata kelola administrasi modern, otomasi perkantoran digital, public relations, kearsipan elektronik, dan etika komunikasi bisnis.</p>
@@ -1488,7 +1685,7 @@
                 </article>
 
                 <!-- AKUNTANSI -->
-                <article class="jurusan-card">
+                <article class="jurusan-card reveal">
                     <div class="jurusan-icon-box">📊</div>
                     <h3>Akuntansi</h3>
                     <p>Mempelajari pembukuan keuangan berbasis komputerisasi, akuntansi perpajakan, perbankan, dan penyusunan laporan keuangan terstandar.</p>
@@ -1502,7 +1699,7 @@
                 </article>
 
                 <!-- RPL -->
-                <article class="jurusan-card">
+                <article class="jurusan-card reveal">
                     <div class="jurusan-icon-box">&lt;/&gt;</div>
                     <h3>Rekayasa Perangkat Lunak</h3>
                     <p>Mempelajari pembuatan software, website modern dengan HTML/CSS/Laravel, aplikasi mobile, basis data MySQL, dan UI/UX design.</p>
@@ -1519,39 +1716,39 @@
 
         <!-- FASILITAS UNGGULAN -->
         <section id="fasilitas" class="section">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Sarana & Prasarana</span>
                 <h2 class="section-title">Fasilitas Sekolah Lengkap</h2>
                 <p class="section-desc">Mendukung kenyamanan dan kelancaran proses belajar mengajar secara optimal.</p>
             </div>
 
-            <div class="fasilitas-grid">
-                <div class="fasilitas-card">
+            <div class="fasilitas-grid stagger-group">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">💻</div>
                     <h3>Lab Komputer Standar Industri</h3>
                     <p>Ruang lab ber-AC dengan PC spek tinggi dan koneksi internet cepat untuk praktik coding dan networking.</p>
                 </div>
-                <div class="fasilitas-card">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">📚</div>
                     <h3>Perpustakaan Digital</h3>
                     <p>Koleksi ribuan buku referensi pelajaran, e-book teknologi, dan ruang baca yang nyaman serta tenang.</p>
                 </div>
-                <div class="fasilitas-card">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">🏢</div>
                     <h3>Workshop & Business Center</h3>
                     <p>Sarana teaching factory untuk melatih siswa mengerjakan proyek nyata dari pesanan mitra industri.</p>
                 </div>
-                <div class="fasilitas-card">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">⚽</div>
                     <h3>Lapangan Olahraga</h3>
                     <p>Lapangan serbaguna untuk olahraga futsal, basket, voli, serta kegiatan apel dan upacara bendera.</p>
                 </div>
-                <div class="fasilitas-card">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">🕌</div>
                     <h3>Musholla Al-Mutiara</h3>
                     <p>Tempat ibadah yang bersih dan luas untuk pembinaan ibadah shalat berjamaah dan kegiatan kerohanian.</p>
                 </div>
-                <div class="fasilitas-card">
+                <div class="fasilitas-card reveal">
                     <div class="fasilitas-icon">📶</div>
                     <h3>Area Wi-Fi Sekolah</h3>
                     <p>Jaringan internet gratis berkecepatan tinggi yang dapat diakses di seluruh area lingkungan kampus sekolah.</p>
@@ -1561,14 +1758,14 @@
 
         <!-- EKSTRAKURIKULER -->
         <section id="ekskul" class="section" style="padding-top: 10px;">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Pengembangan Diri</span>
                 <h2 class="section-title">Kegiatan Ekstrakurikuler</h2>
                 <p class="section-desc">Wadah bagi siswa untuk mengasah bakat kepemimpinan, beladiri, seni, dan kerohanian.</p>
             </div>
 
-            <div class="ekskul-grid">
-                <article class="ekskul-card">
+            <div class="ekskul-grid stagger-group">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-pramuka.jpg') }}" alt="Ekstrakurikuler Pramuka SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Wajib</span>
@@ -1579,7 +1776,7 @@
                     </div>
                 </article>
 
-                <article class="ekskul-card">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-taekwondo.jpg') }}" alt="Ekstrakurikuler Taekwondo SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Bela Diri</span>
@@ -1590,7 +1787,7 @@
                     </div>
                 </article>
 
-                <article class="ekskul-card">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-silat.jpg') }}" alt="Ekstrakurikuler Tadjimalela SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Pencak Silat</span>
@@ -1601,7 +1798,7 @@
                     </div>
                 </article>
 
-                <article class="ekskul-card">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-rohis.jpg') }}" alt="Ekstrakurikuler FURI SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Kerohanian</span>
@@ -1612,7 +1809,7 @@
                     </div>
                 </article>
 
-                <article class="ekskul-card">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-tari.jpg') }}" alt="Ekstrakurikuler Seni Tari SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Kesenian</span>
@@ -1623,7 +1820,7 @@
                     </div>
                 </article>
 
-                <article class="ekskul-card">
+                <article class="ekskul-card reveal">
                     <div class="ekskul-banner">
                         <img src="{{ asset('images/eskul-paskibra.jpg') }}" alt="Ekstrakurikuler Paskibra SMK Mutiara Bandung" loading="lazy">
                         <span class="ekskul-badge-overlay">Kedisiplinan</span>
@@ -1638,7 +1835,7 @@
 
         <!-- VIDEO PROFIL -->
         <section class="section" style="padding-top: 20px;">
-            <div class="video-box-wrap">
+            <div class="video-box-wrap reveal reveal-zoom">
                 <span class="section-tag" style="background: rgba(255, 255, 255, 0.15); color: #fef08a; border-color: transparent;">Video Tour</span>
                 <h2>Mengenal Lebih Dekat SMK Mutiara Bandung</h2>
                 <p>Simak tayangan video dokumenter profil kegiatan belajar, keseruan praktik laboratorium, dan prestasi membanggakan siswa kami.</p>
@@ -1652,13 +1849,13 @@
 
         <!-- PPDB (PENERIMAAN PESERTA DIDIK BARU) -->
         <section id="ppdb" class="section">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Pendaftaran Siswa Baru</span>
                 <h2 class="section-title">Penerimaan Peserta Didik Baru (PPDB)</h2>
                 <p class="section-desc">Bergabunglah menjadi bagian dari keluarga besar SMK Mutiara Bandung Tahun Ajaran 2027/2028.</p>
             </div>
 
-            <div class="ppdb-container">
+            <div class="ppdb-container reveal">
                 <div class="ppdb-header-banner">
                     <h2>Pendaftaran Gelombang I Telah Dibuka</h2>
                     <p>Kuota Terbatas untuk Setiap Program Keahlian</p>
@@ -1666,7 +1863,7 @@
 
                 <div class="ppdb-content-inner">
                     <!-- ALUR PENDAFTARAN -->
-                    <div class="timeline-steps">
+                    <div class="timeline-steps reveal-left">
                         <div class="step-item">
                             <b>Langkah 1: Registrasi Formulir</b>
                             <span>Isi formulir online atau datang langsung ke ruang panitia PPDB kampus sekolah.</span>
@@ -1682,7 +1879,7 @@
                     </div>
 
                     <!-- SYARAT -->
-                    <div class="syarat-box">
+                    <div class="syarat-box reveal-right">
                         <h3>Persyaratan Dokumen Pendaftaran</h3>
                         <ul class="syarat-list">
                             <li>Fotokopi Ijazah / Surat Keterangan Lulus (SKL) SMP/MTs (2 lembar)</li>
@@ -1705,14 +1902,14 @@
 
         <!-- KONTAK & LOKASI -->
         <section id="kontak" class="section">
-            <div class="section-header">
+            <div class="section-header reveal">
                 <span class="section-tag">Hubungi Kami</span>
                 <h2 class="section-title">Informasi & Lokasi Kampus</h2>
                 <p class="section-desc">Silakan kunjungi kampus kami atau hubungi bagian informasi di jam kerja operasional.</p>
             </div>
 
             <div class="kontak-grid">
-                <div class="kontak-card">
+                <div class="kontak-card reveal-left">
                     <dl>
                         <div class="kontak-item">
                             <div class="kontak-icon">📍</div>
@@ -1756,7 +1953,7 @@
                     </dl>
                 </div>
 
-                <div class="maps-placeholder">
+                <div class="maps-placeholder reveal-right">
                     <div style="font-size: 3rem;">🗺️</div>
                     <h3 style="color: var(--primary-dark);">Lokasi Kampus SMK Mutiara Bandung</h3>
                     <p style="color: var(--text-muted); max-width: 380px;">
@@ -1772,7 +1969,7 @@
 
     <!-- FOOTER -->
     <footer class="footer">
-        <div class="footer-inner">
+        <div class="footer-inner reveal">
             <div class="footer-brand">
                 <h4>SMK Mutiara Bandung</h4>
                 <p>Sekolah Menengah Kejuruan Berbasis Teknologi & Industri Terpercaya di Kota Bandung</p>
@@ -1784,7 +1981,7 @@
                 <a href="#kontak" class="social-link" title="TikTok">TT</a>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom reveal delay-1">
             <p>© 2026 <b>SMK Mutiara Bandung</b>. Project Website Profil dibuat oleh <b>Kelompok 3 (Kelas XII RPL)</b>.</p>
         </div>
     </footer>
@@ -1794,5 +1991,148 @@
         <span>💬</span> Chat PPDB
     </a>
 
+    <!-- FLOATING BACK TO TOP BUTTON -->
+    <button id="scrollTopBtn" class="scroll-top-btn" title="Kembali ke Atas" aria-label="Kembali ke Atas">
+        ↑
+    </button>
+
+    <!-- SCROLL ANIMATION & INTERACTION SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Scroll Progress Bar di bagian paling atas layar
+            const progressBar = document.createElement('div');
+            progressBar.className = 'scroll-progress-bar';
+            progressBar.setAttribute('aria-hidden', 'true');
+            document.body.prepend(progressBar);
+
+            // 2. Sticky Navbar, Back to Top, & Scroll Progress Logic
+            const navbar = document.querySelector('.navbar-wrap');
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            let lastScrollY = window.scrollY;
+
+            function updateScrollEffects() {
+                const currentScrollY = window.scrollY;
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+
+                // Update progress bar
+                if (docHeight > 0) {
+                    const scrollPercent = (currentScrollY / docHeight) * 100;
+                    progressBar.style.width = Math.min(100, Math.max(0, scrollPercent)) + '%';
+                }
+
+                // Efek bayangan & transparansi navbar saat scroll
+                if (navbar) {
+                    if (currentScrollY > 40) {
+                        navbar.classList.add('scrolled');
+                    } else {
+                        navbar.classList.remove('scrolled');
+                    }
+                }
+
+                // Munculkan tombol scroll to top saat scroll ke bawah > 320px
+                if (scrollTopBtn) {
+                    if (currentScrollY > 320) {
+                        scrollTopBtn.classList.add('is-visible');
+                    } else {
+                        scrollTopBtn.classList.remove('is-visible');
+                    }
+                }
+
+                lastScrollY = currentScrollY;
+            }
+
+            window.addEventListener('scroll', updateScrollEffects, { passive: true });
+            updateScrollEffects();
+
+            // Klik tombol scroll to top untuk kembali ke atas dengan halus
+            if (scrollTopBtn) {
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+
+            // 3. Animasi Angka Statistik (Count-up)
+            let statsAnimated = false;
+            function runStatsCounter() {
+                const statNumbers = document.querySelectorAll('.stat-number');
+                statNumbers.forEach(el => {
+                    const originalHTML = el.innerHTML;
+                    const hasPlus = originalHTML.includes('+');
+                    const numMatch = originalHTML.match(/\d+/);
+                    if (!numMatch) return;
+
+                    const targetVal = parseInt(numMatch[0], 10);
+                    let startTime = null;
+                    const duration = 1200; // ms
+
+                    function animateCount(timestamp) {
+                        if (!startTime) startTime = timestamp;
+                        const elapsed = timestamp - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        // Easing out cubic
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const currentVal = Math.floor(easeOut * targetVal);
+
+                        el.innerHTML = currentVal + (hasPlus ? '<span>+</span>' : '');
+
+                        if (progress < 1) {
+                            requestAnimationFrame(animateCount);
+                        } else {
+                            el.innerHTML = targetVal + (hasPlus ? '<span>+</span>' : '');
+                        }
+                    }
+
+                    requestAnimationFrame(animateCount);
+                });
+            }
+
+            // 4. Scroll Reveal IntersectionObserver (Animasi aktif setiap kali scroll ke bawah)
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-zoom');
+
+            if (!('IntersectionObserver' in window)) {
+                revealElements.forEach(el => el.classList.add('is-visible'));
+                return;
+            }
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -40px 0px',
+                threshold: 0.12
+            };
+
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    const el = entry.target;
+                    const rect = entry.boundingClientRect;
+                    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+
+                    if (entry.isIntersecting) {
+                        // Animasi saat elemen terlihat ketika scroll ke bawah
+                        el.classList.add('is-visible');
+
+                        // Jalankan hitungan statistik bila kartu statistik muncul
+                        if (el.classList.contains('stats-wrap') && !statsAnimated) {
+                            statsAnimated = true;
+                            runStatsCounter();
+                        }
+                    } else {
+                        // Jika elemen keluar kembali ke bawah layar (user scroll ke atas melewatinya),
+                        // reset status agar saat user scroll ke bawah LAGI, animasi kembali berjalan!
+                        if (rect.top > viewportHeight) {
+                            el.classList.remove('is-visible');
+                            if (el.classList.contains('stats-wrap')) {
+                                statsAnimated = false;
+                            }
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            revealElements.forEach(el => revealObserver.observe(el));
+        });
+    </script>
 </body>
 </html>
